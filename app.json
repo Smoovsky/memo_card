@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "sdkVersion": "25.0.0",
+	"orientation": "portrait",
+    "name": "Memo Card",
+    "description": "The best triathlon training app in the world.",
+    "slug": "MemoCard",
+    "version": "1.0",
+    "icon": "http://45.76.98.13/cards.png",
+    "notification": {
+      "icon": "http://45.76.98.13/cards.png"
+    },
+    "ios": {
+     "bundleIdentifier": "org.udaciCard.exp",
+    },
+    "android": {
+     "package": "org.udaciCard.exp",
+    }
+  }
+}
