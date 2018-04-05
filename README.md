@@ -1,4 +1,4 @@
-###Memo Card
+### Memo Card
 A react native application to help memorizing with quizz cards.
 
 You can categorize questions into different genres and put them into different 'decks' representing each genre. In each 'deck', you can test yourself with the questions you put in, by setting corrent/wrong of each question you will get a final mark to see how well you have grasp the questions.
@@ -15,7 +15,7 @@ and run
 npm start
 ```
 
-##Readme from create-react-app
+## Readme from create-react-app
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
