@@ -14,6 +14,7 @@ class NewDeck extends Component{
     if(typeof(this.state.deckName)==='string'){
       this.props.newDeck(this.state.deckName);
     }
+    this.setState({deckName:''});
     this.props.navigation.goBack();
   }
   render(){

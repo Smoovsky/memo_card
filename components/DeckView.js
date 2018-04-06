@@ -4,6 +4,8 @@ import { FlatList, StyleSheet, View, Modal } from 'react-native';
 import {getDecks, newDeck, renameDeck, deleteDeck} from '../actions';
 import Deck from './Deck';
 import DeckUtil from './DeckUtil';
+import {checkProgress} from '../utils/api';
+
 
 class DeckView extends Component{
   state = {
@@ -22,8 +24,12 @@ class DeckView extends Component{
   onPressDeck = () => {
     alert('long press detected');
   }
+  setReady = () => {
+    this.setState({ready:true});
+    checkProgress(this.props.decks);
+  }
   componentDidMount(){
-    this.props.getDecks().then(this.setState({ready:true}));
+    this.props.getDecks().then(this.setReady);
   }
   renderItem = ({item}) => {
     return (<Deck deck={item} onPress={this.onPressDeck} deckUtil={this.deckUtil}
@@ -35,23 +41,25 @@ class DeckView extends Component{
   }
   render(){
     return (
-      <View style={styles.deckView}>
-        <FlatList
-          data={Object.keys(this.props.decks)}
-          keyExtractor = {this.keyExtractor}
-          renderItem = {this.renderItem}
-        />
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={this.state.deckUtilModalOpen}
-          onRequestClose={this.toggleDeckUtilModal}
-        >
-          <DeckUtil
-            target={this.state.utilTarget}
-            toggleDeckUtilModal={this.toggleDeckUtilModal}/>
-        </Modal>
-      </View>
+      this.state.ready ?
+        <View style={styles.deckView}>
+          <FlatList
+            data={Object.keys(this.props.decks)}
+            keyExtractor = {this.keyExtractor}
+            renderItem = {this.renderItem}
+          />
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={this.state.deckUtilModalOpen}
+            onRequestClose={this.toggleDeckUtilModal}
+          >
+            <DeckUtil
+              target={this.state.utilTarget}
+              toggleDeckUtilModal={this.toggleDeckUtilModal}/>
+          </Modal>
+        </View> :
+        null
     );
   }
 }

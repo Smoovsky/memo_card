@@ -40,56 +40,5 @@ export const defaultDeck = {
       }
     ]
   },
-  sampleDeck4:{
-    title:'sampleDeck1',
-    cards:[
-      {
-        question:'sampleQuestion1',
-        answer:'sampleAnswer1'
-      },
-      {
-        question:'sampleQuestion2',
-        answer:'sampleAnswer12'
-      }
-    ]
-  },
-  sampleDeck5:{
-    title:'sampleDeck1',
-    cards:[
-      {
-        question:'sampleQuestion1',
-        answer:'sampleAnswer1'
-      },
-      {
-        question:'sampleQuestion2',
-        answer:'sampleAnswer12'
-      }
-    ]
-  },
-  sampleDeck6:{
-    title:'sampleDeck1',
-    cards:[
-      {
-        question:'sampleQuestion1',
-        answer:'sampleAnswer1'
-      },
-      {
-        question:'sampleQuestion2',
-        answer:'sampleAnswer12'
-      }
-    ]
-  },
-  sampleDeck7:{
-    title:'sampleDeck1',
-    cards:[
-      {
-        question:'sampleQuestion1',
-        answer:'sampleAnswer1'
-      },
-      {
-        question:'sampleQuestion2',
-        answer:'sampleAnswer12'
-      }
-    ]
-  }
+
 };

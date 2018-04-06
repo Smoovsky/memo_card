@@ -59,8 +59,11 @@ class DeckDetail extends Component{
   newCard = () => {
     if(typeof(this.state.cardQuestionInput) === 'string' && typeof(this.state.cardAnswerInput) === 'string'){
       this.toggleModal();
-      return this.props.newCard(this.props.deck, {question:this.state.cardQuestionInput, answer:this.state.cardAnswerInput});
+      this.props.newCard(this.props.deck, {question:this.state.cardQuestionInput, answer:this.state.cardAnswerInput});
+      this.setState({cardQuestionInput:'',
+        cardAnswerInput:''});
     }
+
   }
   renderItem = ({item}) => {
     return (<Deck deck={item}/>);

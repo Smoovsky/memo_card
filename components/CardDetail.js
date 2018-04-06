@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextButton from './TextButton';
-import { View, Animated, Text, StyleSheet, BackHandler } from 'react-native';
+import { View, Animated, Text, StyleSheet, BackHandler, AsyncStorage } from 'react-native';
 import ContainerView from './ContainerView';
 import { black, green, red } from '../utils/colors';
+import {updateProgress, checkCompletion} from '../utils/api';
 
 class CardDetail extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -72,9 +73,6 @@ class CardDetail extends Component {
   };
   nextQuestion = () => {
     let { currentQuestion } = this.state;
-    if (currentQuestion === this.props.cards.length - 1) {
-      this.setState({ resultReached: true });
-    }
     this.setState(
       {
         currentQuestion:
@@ -83,12 +81,17 @@ class CardDetail extends Component {
             : currentQuestion + 1
       },
       () => {
-        this.props.navigation.setParams({
-          card: (this.state.currentQuestion + 1).toString()
-        });
+        if(!this.state.resultReached){
+          this.props.navigation.setParams({
+            card: (this.state.currentQuestion + 1).toString()
+          });}
       }
     );
     this.setState({ currentView: 'question' });
+
+    if (currentQuestion === this.props.cards.length - 1) {
+      this.setState({ resultReached: true });
+    }
   };
   onFlip = () => {
     let done = false;
@@ -176,11 +179,12 @@ class CardDetail extends Component {
     );
   };
   resultView = () => {
-    BackHandler;
+    console.log('result');
     let result = 0;
     this.state.result.forEach(x => {
       if (x === true) result++;
     });
+    updateProgress(this.props.deck).then(checkCompletion);
     return (
       <ContainerView>
         <Text style={styles.questionText}>You scored:{' ' + result}</Text>

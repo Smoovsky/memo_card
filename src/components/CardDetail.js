@@ -4,7 +4,7 @@ import TextButton from './TextButton';
 import { View, Animated, Text, StyleSheet, BackHandler, AsyncStorage } from 'react-native';
 import ContainerView from './ContainerView';
 import { black, green, red } from '../utils/colors';
-import updateProgress from '../utils/api';
+import {updateProgress, checkCompletion} from '../utils/api';
 
 class CardDetail extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -182,6 +182,7 @@ class CardDetail extends Component {
       if (x === true) result++;
     });
     updateProgress(this.props.deck);
+    checkCompletion();
     return (
       <ContainerView>
         <Text style={styles.questionText}>You scored:{' ' + result}</Text>

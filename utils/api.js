@@ -40,8 +40,9 @@ export function checkProgress(decks){
   return AsyncStorage.getItem(PROGRESS_KEY)
     .then(JSON.parse)
     .then((data) => {
-      console.log('progress checked:', data, decks);
+      //console.log('progress checked:', data, decks);
       if(data === null || data.date !== today){
+        setNotification();
         return AsyncStorage.setItem(PROGRESS_KEY, JSON.stringify({decks, date:today}));
       }
     });
@@ -55,6 +56,7 @@ export function updateProgress(deck){
         console.log('progress updated:', deck);
         let newDeck = {...data.decks};
         newDeck[deck].progress = true;
+        //console.log(newDeck);
         return AsyncStorage.setItem(PROGRESS_KEY, JSON.stringify({decks:newDeck, date:today}));
       }
     });
@@ -65,9 +67,10 @@ export function checkCompletion(){
     .then(JSON.parse)
     .then((data) => {
       let result = true;
-      for (let x in data){
-        console.log('checking',x);
-        if(!x.progress){
+      //console.log(data.decks);
+      for (let x in data.decks){
+        //console.log('checking',x);
+        if(!data.decks[x].progress){
           result = false;
           break;
         }
@@ -80,21 +83,22 @@ export function checkCompletion(){
 }
 
 export function setNotification() {
+  console.log('set');
   return AsyncStorage.getItem(NOTIFICATION_KEY)
     .then(data => {
-      console.log(data);
+      //console.log(data);
       return JSON.parse(data);
     })
     .then(data => {
       if (data === null) {
         Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
           if (status === 'granted') {
-            Notifications.cancelAllScheduledNotificationAsync();
+            Notifications.cancelAllScheduledNotificationsAsync();
             let tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
             tomorrow.setHours(18);
             tomorrow.setMinutes(0);
-            Notifications.scheduleLocalNotificationsAsync(notificationBody, {
+            Notifications.scheduleLocalNotificationAsync(notificationBody, {
               time: tomorrow,
               repeat: 'day'
             });
@@ -105,8 +109,9 @@ export function setNotification() {
 }
 
 export function clearNotification() {
+  console.log('clear');
   return AsyncStorage.removeItem(NOTIFICATION_KEY).then(
-    Notifications.cancelAllScheduledNotificationAsync
+    Notifications.cancelAllScheduledNotificationsAsync
   );
 }
 

@@ -24,9 +24,13 @@ class DeckView extends Component{
   onPressDeck = () => {
     alert('long press detected');
   }
+  setReady(){
+    console.log(this);
+    //this.setState({ready:true});
+  }
   componentDidMount(){
-    this.props.getDecks().then(this.setState({ready:true}));
-    console.log(23);
+    console.log(233);
+    this.props.getDecks().then(this.setReady);
     checkProgress(this.props.decks);
   }
   renderItem = ({item}) => {
@@ -38,24 +42,27 @@ class DeckView extends Component{
     return item;
   }
   render(){
+    console.log(232);
     return (
-      <View style={styles.deckView}>
-        <FlatList
-          data={Object.keys(this.props.decks)}
-          keyExtractor = {this.keyExtractor}
-          renderItem = {this.renderItem}
-        />
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={this.state.deckUtilModalOpen}
-          onRequestClose={this.toggleDeckUtilModal}
-        >
-          <DeckUtil
-            target={this.state.utilTarget}
-            toggleDeckUtilModal={this.toggleDeckUtilModal}/>
-        </Modal>
-      </View>
+      this.state.ready ?
+        <View style={styles.deckView}>
+          <FlatList
+            data={Object.keys(this.props.decks)}
+            keyExtractor = {this.keyExtractor}
+            renderItem = {this.renderItem}
+          />
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={this.state.deckUtilModalOpen}
+            onRequestClose={this.toggleDeckUtilModal}
+          >
+            <DeckUtil
+              target={this.state.utilTarget}
+              toggleDeckUtilModal={this.toggleDeckUtilModal}/>
+          </Modal>
+        </View> :
+        null
     );
   }
 }
