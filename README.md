@@ -3,6 +3,11 @@ A react native application to help memorizing with quizz cards.
 
 You can categorize questions into different genres and put them into different 'decks' representing each genre. In each 'deck', you can test yourself with the questions you put in, by setting corrent/wrong of each question you will get a final mark to see how well you have grasp the questions.
 
+## Update since last submission
+1. Notification feature is now added to the project. User should at least test themselves against all questions at least once a day, and this is not necessarily done all at once, as long as they finish all decks in one day, they won't get notification reminder later that day. However, any changes made to existing question set will come into effect the second day, which kinda make sense.
+
+2. Textinput fields will clear automatically upon submission.
+
 ## Debug with Expo
 Simply install all dependencies with
 
