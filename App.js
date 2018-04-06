@@ -80,8 +80,8 @@ const StackNav = StackNavigator({
 });
 
 export default class App extends React.Component {
-  render() {
 
+  render() {
     return (
       <Provider store={store}>
         <View style={{flex:1}}>
